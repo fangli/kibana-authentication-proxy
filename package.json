@@ -1,0 +1,30 @@
+{
+  "name": "kibana-proxy",
+  "version": "0.0.0",
+  "description": "Server tier for (kibana)[http://kibana.org/kibana3]; Proxies the calls to Elasticsearch and insert authentication.",
+  "main": "app.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/hmalphettes/kibana-proxy"
+  },
+  "keywords": [
+    "kibana",
+    "elasticsearch"
+  ],
+  "author": "Hugues Malphettes",
+  "license": "MIT",
+  "copyright": "Sutoiku",
+  "dependencies": {
+    "express": "*",
+    "passport": "*",
+    "passport-google-oauth": "*"
+  },
+  "devDependencies": {
+  },
+  "bugs": {
+    "url": "https://github.com/hmalphettes/kibana-proxy/issues"
+  }
+}

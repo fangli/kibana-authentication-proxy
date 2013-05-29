@@ -1,0 +1,13 @@
+node_modules
+npm-debug.log
+.DS_Store
+meta.json
+.idea
+coverage.html
+lib-cov
+.coverage_data
+reports
+html-report
+build
+cobertura-coverage.xml
+metadata

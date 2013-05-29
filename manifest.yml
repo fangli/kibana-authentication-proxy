@@ -1,0 +1,15 @@
+---
+applications:
+- name: kibana-on-cloudfoundry
+  framework: node
+  runtime: node08
+  memory: 64M
+  instances: 1
+  url: kibana-on-cloudfoundry.${target-base}
+  path: .
+  env:
+    ES_URL: 'http://user:password@your-elasticsearch.cloudfoundry.com'
+    APP_ID: ''
+    APP_SECRET: ''
+    AUTHORIZED_EMAILS: '*@sutoiku.com,hugues@stoic.cc'
+
