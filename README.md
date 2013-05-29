@@ -13,7 +13,7 @@ Usage
 =====
 
 ```
-git clone git@github.com:hmalphettes/Old-Kibana-2-ruby-sinatra.git
+git clone git@github.com:hmalphettes/kibana-proxy.git
 git submodule init
 git submodule update
 npm install
@@ -25,12 +25,12 @@ Configuration
 =============
 Configuration is done via environment variables:
 - `ES_URL`: example: `http://user:password@your-elasticsearch.local`; default: `http://localhost:9200`
-- `PORT`: the port where the app is run, default to 3003
+- `PORT`: the port where the app is run, default to `VCAP_PORT` and then to `3003`.
 - `APP_ID`, `APP_SECRET`: Google OAuth2 config. Optional.
-- `AUTHORIZED_EMAILS`: define what authenticated email is granted access; a comma separated listed of patterns; defaults to '*'. example: `*@stoic.com,justme@gmail.com` each pattern must be one-of:
-    - '*': anything,
-    - '*@domain': any email in the domain
-    - 'an@email': a specific email.
+- `AUTHORIZED_EMAILS`: define what authenticated email is granted access; a comma separated listed of patterns; defaults to `*`. example: `*@stoic.com,justme@gmail.com` each pattern must be one-of:
+    - `*`: anything,
+    - `*@domain`: any email in the domain
+    - `an@email`: a specific email.
 
 Push to cloudfoundry.com
 ========================
