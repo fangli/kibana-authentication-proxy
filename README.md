@@ -39,13 +39,12 @@ Push to cloudfoundry.com
 - `vmc push --manifest-real.yml`.
 
 Resources
----------
+=========
 - [Kibana 3](http://three.kibana.org) and its friend [Logstash](http://logstash.net)
 - Generate some logs from nodejs without going through logstash: [log4js-elasticsearch](https://github.com/hmalphettes/log4js-elasticsearch)
 
 License
--------
-# LICENSE
+=======
 kibana-proxy is freely distributable under the terms of the MIT license.
 
 Copyright (c) 2013 Sutoiku, Inc.
