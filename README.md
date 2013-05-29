@@ -8,7 +8,6 @@ Features:
 - Optional Google OAuth2 login with (passport)[http://passport.org].
 - Support for Elasticsearch protected by basic-authentication: only the express app will know about the username and password.
 
-
 Usage
 =====
 
@@ -34,6 +33,7 @@ Configuration is done via environment variables:
 
 Push to cloudfoundry.com
 ========================
-- Copy the manifest-example.yml file as manifest-real.yml provided as an example.
-- Change the name of the app and elasticsearch URL.
+- Copy the `manifest-example.yml` file as `manifest-real.yml` provided as an example.
+- Must: change the name of the app and elasticsearch URL.
+- Could: add `APP_ID`, `APP_SECRET` and `AUTHORIZED_EMAILS` to protect access.
 - `vmc push --manifest-real.yml`.
