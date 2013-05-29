@@ -27,10 +27,10 @@ Configuration is done via environment variables:
 - `ES_URL`: example: `http://user:password@your-elasticsearch.local`; default: `http://localhost:9200`
 - `PORT`: the port where the app is run, default to 3003
 - `APP_ID`, `APP_SECRET`: Google OAuth2 config. Optional.
-- `AUTHORIZED_EMAILS`: define what authenticated email is granted access; a comma separated listed of patterns; defaults to '*'. each pattern must be one-of:
+- `AUTHORIZED_EMAILS`: define what authenticated email is granted access; a comma separated listed of patterns; defaults to '*'. example: `*@stoic.com,justme@gmail.com` each pattern must be one-of:
     - '*': anything,
-    -- '*@domain': any email in the domain
-    -- 'an@email': a specific email.
+    - '*@domain': any email in the domain
+    - 'an@email': a specific email.
 
 Push to cloudfoundry.com
 ========================
