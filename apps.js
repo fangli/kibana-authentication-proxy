@@ -70,13 +70,8 @@ function parseESURL(esurl, config) {
   }
   if (urlP.auth) {
     var toks = urlP.auth.split(':');
-    if (toks.length === 2) {
-      config.es_username = toks[0];
-      config.es_password = toks[1];
-    } else {
-      config.es_username = toks[0];
-      config.es_password = '';
-    }
+    config.es_username = toks[0];
+    config.es_password = toks[1] || '';
   }  
 }
 
