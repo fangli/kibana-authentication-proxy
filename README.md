@@ -8,6 +8,11 @@ Features:
 - Optional Google OAuth2 login with (passport)[http://passport.org].
 - Support for Elasticsearch protected by basic-authentication: only the express app will know about the username and password.
 
+Front-ends specifically tested:
+- [Kibana 3](http://three.kibana.org)
+- [Head](https://github.com/mobz/elasticsearch-head)
+- [Bigdesk](https://github.com/lukas-vlcek/bigdesk)
+
 Usage
 =====
 
@@ -18,6 +23,8 @@ git submodule update
 npm install
 node app.js &
 open http://localhost:3003
+open http://localhost:3003/_plugin/head
+open http://localhost:3003/_plugin/bigdesk
 ```
 
 Configuration

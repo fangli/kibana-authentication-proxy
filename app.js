@@ -43,6 +43,8 @@ function createConfig() {
 
 function configureApp(app, config) {
   app.disable('x-powered-by');
+  app.use(express.logger('dev'));
+
   configureOAuth(express, app, config);
 
   app.get('/config.js', kibanaConfig);
