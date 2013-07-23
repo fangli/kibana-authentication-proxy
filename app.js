@@ -82,8 +82,9 @@ function kibanaConfig(request, response) {
   var responseBody = "var config = new Settings({\n" +
   "elasticsearch: '//'+window.location.host+'/__es',\n" +
   "kibana_index: 'kibana-int',\n" + 
-  "modules: ['histogram','map','pie','table','stringquery','sort'," +
-            "'timepicker','text','fields','hits','dashcontrol','column','derivequeries','trends']\n" +
+  "modules: ['histogram','map','pie','table','filtering'," +
+            "'timepicker','text','fields','hits','dashcontrol',"+
+            "'column','derivequeries','trends','bettermap','query']\n" +
   "});";
   response.setHeader('Content-Type', 'application/javascript');
   response.end(responseBody);
