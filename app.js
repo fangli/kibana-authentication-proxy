@@ -27,7 +27,7 @@ function createConfig() {
     config.port = process.env.PORT || process.env.VCAP_APP_PORT || 3003;
   }
   if (!config.es_url) {
-    config.es_url = process.env.ES_URL || 'http://hugues.local:9200';
+    config.es_url = process.env.ES_URL || 'http://localhost:9200';
   }
   // oauth
   if (process.env.APP_ID && process.env.APP_SECRET) {
