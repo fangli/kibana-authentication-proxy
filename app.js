@@ -74,17 +74,18 @@ function parseESURL(esurl, config) {
     var toks = urlP.auth.split(':');
     config.es_username = toks[0];
     config.es_password = toks[1] || '';
-  }  
+  }
 }
 
 function kibanaConfig(request, response) {
   //returns the javascript that is the config object. for kibana.
   var responseBody = "var config = new Settings({\n" +
   "elasticsearch: '//'+window.location.host+'/__es',\n" +
-  "kibana_index: 'kibana-int',\n" + 
+  "kibana_index: 'kibana-int',\n" +
   "modules: ['histogram','map','pie','table','filtering'," +
             "'timepicker','text','fields','hits','dashcontrol',"+
-            "'column','derivequeries','trends','bettermap','query']\n" +
+            "'column','derivequeries','trends','bettermap','query',"+
+            "'terms']\n" +
   "});";
   response.setHeader('Content-Type', 'application/javascript');
   response.end(responseBody);
