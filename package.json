@@ -20,7 +20,8 @@
   "dependencies": {
     "express": "*",
     "passport": "*",
-    "passport-google-oauth": "*"
+    "passport-google-oauth": "*",
+    "connect-restreamer": "*"
   },
   "devDependencies": {
   },
