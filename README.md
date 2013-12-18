@@ -15,7 +15,7 @@ Installation
 =====
 
 ```
-# git clone git@github.com:fangli/kibana-authentication-proxy.git
+# git clone https://github.com/fangli/kibana-authentication-proxy
 # git submodule init
 # git submodule update
 # npm install
