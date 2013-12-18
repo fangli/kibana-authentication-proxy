@@ -1,22 +1,25 @@
 {
-  "name": "kibana-oauth-proxy",
+  "name": "kibana-authentication-proxy",
   "version": "1.0.0",
-  "description": "Hosts the latest kibana3 and elasticsearch behind Google OAuth2 Authentication",
+  "description": "Hosts the latest kibana3 and elasticsearch behind Google OAuth2 or Basic Auth",
   "main": "app.js",
   "scripts": {
     "test": ""
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/fangli/kibana-oauth-proxy"
+    "url": "http://github.com/fangli/kibana-authentication-proxy"
   },
   "keywords": [
     "kibana",
-    "elasticsearch"
+    "elasticsearch",
+    "authentication",
+    "oauth2",
+    "basic authentication"
   ],
-  "author": "Hugues Malphettes",
+  "author": "Fang Li",
   "license": "MIT",
-  "copyright": "Sutoiku",
+  "copyright": "Funplus Game",
   "dependencies": {
     "express": "*",
     "passport": "*",
@@ -26,6 +29,6 @@
   "devDependencies": {
   },
   "bugs": {
-    "url": "https://github.com/fangli/kibana-oauth-proxy/issues"
+    "url": "https://github.com/fangli/kibana-authentication-proxy/issues"
   }
 }
