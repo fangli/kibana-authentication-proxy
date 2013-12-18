@@ -1,3 +1,0 @@
-[submodule "kibana"]
-	path = kibana
-	url = git://github.com/elasticsearch/kibana.git

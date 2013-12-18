@@ -1,7 +1,0 @@
-manifest.yml
-node_modules/.bin
-.git
-kibana/.git
-.jshintrc
-manifest*
-.gitignore
