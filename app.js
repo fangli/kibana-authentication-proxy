@@ -52,7 +52,7 @@ function configureApp(app, config) {
   configureESProxy(app, config.es_host, config.es_port,
             config.es_username, config.es_password);
 
-  app.use('/', express.static(__dirname + '/kibana'));
+  app.use('/', express.static(__dirname + '/kibana/src'));
   server = app.listen(config.port, /*"0.0.0.0",*/ function() {
     console.log('server listening on ' + config.port);
   });
