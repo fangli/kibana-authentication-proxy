@@ -79,14 +79,7 @@ function parseESURL(esurl, config) {
 
 function kibanaConfig(request, response) {
   //returns the javascript that is the config object. for kibana.
-  var responseBody = "var config = new Settings({\n" +
-  "elasticsearch: '//'+window.location.host+'/__es',\n" +
-  "kibana_index: 'kibana-int',\n" +
-  "modules: ['histogram','map','pie','table','filtering'," +
-            "'timepicker','text','fields','hits','dashcontrol',"+
-            "'column','derivequeries','trends','bettermap','query',"+
-            "'terms']\n" +
-  "});";
+  var responseBody = "define(['settings'], function (Settings) {'use strict'; return new Settings({elasticsearch: 'http://'+window.location.host+'/__es', default_route     : '/dashboard/file/default.json', kibana_index: 'kibana-int', panel_names: ['histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'sparklines'] }); });";
   response.setHeader('Content-Type', 'application/javascript');
   response.end(responseBody);
 }

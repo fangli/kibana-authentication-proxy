@@ -17,7 +17,7 @@ Usage
 =====
 
 ```
-git clone git@github.com:hmalphettes/kibana-proxy.git
+git clone git@github.com:fangli/kibana-oauth-proxy.git
 git submodule init
 git submodule update
 npm install
