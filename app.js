@@ -11,8 +11,17 @@ var express = require('express');
 var config = require('./config');
 var app = express();
 
-require('./lib/google-oauth').configureOAuth(express, app, config);
+console.log('Server starting...');
+
+app.use(express.cookieParser());
+app.use(express.session({ secret: config.cookie_secret }));
+
+// Authentication
 require('./lib/basic-auth').configureBasic(express, app, config);
+require('./lib/google-oauth').configureOAuth(express, app, config);
+require('./lib/cas-auth.js').configureCas(express, app, config);
+
+// Setup ES proxy
 require('./lib/es-proxy').configureESProxy(app, config.es_host, config.es_port,
           config.es_username, config.es_password);
 
@@ -33,5 +42,7 @@ function kibana3configjs(request, response) {
   response.setHeader('Content-Type', 'application/javascript');
   response.end("define(['settings'], " +
     "function (Settings) {'use strict'; return new Settings({elasticsearch: 'http://'+window.location.host+'/__es', default_route     : '/dashboard/file/default.json'," +
-      "kibana_index: 'kibana-int', panel_names: ['histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'sparklines'] }); });");
+      "kibana_index: '" +
+      config.kibana_es_index +
+      "', panel_names: ['histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'sparklines'] }); });");
 }
