@@ -56,7 +56,7 @@ We currently support 3 auth methods: Google OAuth2, BasicAuth and CAS, you can u
 - ``enable_google_oauth``: *Enable or not?*
 - ``client_id``:  *The client ID of Google OAuth2, leave empty if you don't want to use it*
 - ``client_secret``: *The client secret of Google OAuth2*
-- ``allowed_emails``: *An emails list for the authorized users, should like ["a@b.com", "\*@c.com", "\*"]*
+- ``allowed_emails``: *An emails list for the authorized users, should like `["a@b.com", "*@b.com", "*"]`*
 
 ***2. Basic Authentication***
 
