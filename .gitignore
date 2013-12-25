@@ -11,3 +11,5 @@ html-report
 build
 cobertura-coverage.xml
 metadata
+.sublime-workspace
+.sublime-project
