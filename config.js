@@ -29,7 +29,7 @@ module.exports =  {
     // Security Configurations
     ////////////////////////////////////
     // Cookies secret
-    // For security readon please change the following secret randomly
+    // Please change the following secret randomly for security.
     "cookie_secret": "REPLACE_WITH_A_RANDOM_STRING_PLEASE",
 
 
@@ -39,15 +39,20 @@ module.exports =  {
     // You can use one of them or both
     ////////////////////////////////////
 
+
     // =================================
     // Google OAuth2 settings
     // Enable? true or false
     // When set to false, google OAuth will not be applied.
     "enable_google_oauth": false,
+    // We use the following redirect URI:
+    // http://YOUR-KIBANA-SITE:[listen_port]/auth/google/callback
+    // Please add it in the google developers console first.
     // The client ID of Google OAuth2
     "client_id": "",
     "client_secret": "",  // The client secret of Google OAuth2
     "allowed_emails": ["*"],  // An emails list for the authorized users
+
 
     // =================================
     // Basic Authentication Settings
@@ -61,6 +66,7 @@ module.exports =  {
         {"user": "demo1", "password": "pwd1"},
         {"user": "demo1", "password": "pwd2"},
     ],
+
 
     // =================================
     // CAS SSO Login

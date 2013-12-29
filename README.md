@@ -16,6 +16,7 @@ Installation
 
 ```
 # git clone https://github.com/fangli/kibana-authentication-proxy
+# cd kibana-authentication-proxy/
 # git submodule init
 # git submodule update
 # npm install
@@ -23,7 +24,7 @@ Installation
 // You may want to update the built-in kibana3 to the latest version, just run
 # cd kibana && git checkout master && git pull
 
-// Then edit the config.js, just follow the direction in the file
+// Then edit config.js, make sure you have everything checked in the config file
 // and run!
 # node app.js
 ```
@@ -31,9 +32,9 @@ Installation
 Configuration
 =============
 
-All settings are placed in the /config.js file, hack it as you go.
+All settings are placed in /config.js, hack it as you go.
 
-### Elasticsearch backend onfigurations
+### Elasticsearch backend configurations
 
 - ``es_host``:  *The host of ElasticSearch*
 - ``es_port``:  *The port of ElasticSearch*
@@ -45,7 +46,7 @@ All settings are placed in the /config.js file, hack it as you go.
 
 - ``listen_port``:  *The listen port of kibana3*
 - ``kibana_es_index``: *The ES index for saving kibana dashboards*
-- ``cookie_secret``: *The secret salt for client cookie. replace it with a random string for security reason*
+- ``cookie_secret``: *The secret token for cookies. replace it with a random string for security*
 
 ### Client authentication settings
 
@@ -56,7 +57,11 @@ We currently support 3 auth methods: Google OAuth2, BasicAuth and CAS, you can u
 - ``enable_google_oauth``: *Enable or not?*
 - ``client_id``:  *The client ID of Google OAuth2, leave empty if you don't want to use it*
 - ``client_secret``: *The client secret of Google OAuth2*
-- ``allowed_emails``: *An emails list for the authorized users, should like `["a@b.com", "*@b.com", "*"]`*
+- ``allowed_emails``: *An emails list for the authorized users, should like `["a@b.com", "*@b.com", "*"]`*. All google users in the list will be allowed to access kibana.
+
+**Important**
+
+Google OAuth2 needs authorized redirect URIs for your app, please add it first as below, ``http://YOUR-KIBANA-SITE:[listen_port]/auth/google/callback`` in production or ``http://localhost:[listen_port]/auth/google/callback`` for local test
 
 ***2. Basic Authentication***
 
