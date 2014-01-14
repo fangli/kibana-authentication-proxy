@@ -45,6 +45,10 @@ All settings are placed in /config.js, hack it as you go.
 ### Client settings
 
 - ``listen_port``:  *The listen port of kibana3*
+- ``enable_ssl_port``: *Enable SSL or not?*
+- ``listen_port_ssl``: *If enable_ssl_port set to true, this is the port of SSL*
+- ``ssl_key_file``: *Point to the ssl key file*
+- ``ssl_cert_file``: *Point to the ssl certification file*
 - ``kibana_es_index``: *The ES index for saving kibana dashboards*
 - ``cookie_secret``: *The secret token for cookies. replace it with a random string for security*
 
