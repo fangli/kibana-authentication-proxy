@@ -8,6 +8,10 @@
  */
 
 var express = require('express');
+var https = require('https');
+var http = require('http');
+var fs = require('fs');
+
 var config = require('./config');
 var app = express();
 
@@ -33,15 +37,25 @@ app.get('/config.js', kibana3configjs);
 // Serve all kibana3 frontend files
 app.use('/', express.static(__dirname + '/kibana/src'));
 
-app.listen(config.listen_port, function() {
-  console.log('Server listening on ' + config.listen_port);
-});
+run();
 
+function run() {
+  if (config.enable_ssl_port === true) {
+    var options = {
+      key: fs.readFileSync(config.ssl_key_file),
+      cert: fs.readFileSync(config.ssl_cert_file),
+    };
+    https.createServer(options, app).listen(config.listen_port_ssl);
+    console.log('Server listening on ' + config.listen_port_ssl + '(SSL)');
+  }
+  http.createServer(app).listen(config.listen_port);
+  console.log('Server listening on ' + config.listen_port);
+}
 
 function kibana3configjs(request, response) {
   response.setHeader('Content-Type', 'application/javascript');
   response.end("define(['settings'], " +
-    "function (Settings) {'use strict'; return new Settings({elasticsearch: 'http://'+window.location.host+'/__es', default_route     : '/dashboard/file/default.json'," +
+    "function (Settings) {'use strict'; return new Settings({elasticsearch: '/__es', default_route     : '/dashboard/file/default.json'," +
       "kibana_index: '" +
       config.kibana_es_index +
       "', panel_names: ['histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'sparklines'] }); });");

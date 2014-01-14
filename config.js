@@ -15,6 +15,14 @@ module.exports =  {
     ////////////////////////////////////
     // Which port listen to
     "listen_port": 9201,
+    // Enable SSL protocol
+    "enable_ssl_port": false,
+        // The following settings are valid only when enable_ssl_port is true
+        "listen_port_ssl": 4443,
+        // Use absolute path for the key file
+        "ssl_key_file": "POINT_TO_YOUR_SSL_KEY",
+        // Use absolute path for the certification file
+        "ssl_cert_file": "POINT_TO_YOUR_SSL_CERT",
     // The ES index for saving kibana dashboards
     // default to "kibana-int"
     // We are planning a feature that saving kibana dashboard and settings to individual
@@ -45,13 +53,13 @@ module.exports =  {
     // Enable? true or false
     // When set to false, google OAuth will not be applied.
     "enable_google_oauth": false,
-    // We use the following redirect URI:
-    // http://YOUR-KIBANA-SITE:[listen_port]/auth/google/callback
-    // Please add it in the google developers console first.
-    // The client ID of Google OAuth2
-    "client_id": "",
-    "client_secret": "",  // The client secret of Google OAuth2
-    "allowed_emails": ["*"],  // An emails list for the authorized users
+        // We use the following redirect URI:
+        // http://YOUR-KIBANA-SITE:[listen_port]/auth/google/callback
+        // Please add it in the google developers console first.
+        // The client ID of Google OAuth2
+        "client_id": "",
+        "client_secret": "",  // The client secret of Google OAuth2
+        "allowed_emails": ["*"],  // An emails list for the authorized users
 
 
     // =================================
@@ -60,19 +68,19 @@ module.exports =  {
     // It will be applied on the client who access kibana3.
     // Enable? true or false
     "enable_basic_auth": false,
-    // Multiple user/passwd supported
-    // The User&Passwd list for basic auth
-    "basic_auth_users": [
-        {"user": "demo1", "password": "pwd1"},
-        {"user": "demo1", "password": "pwd2"},
-    ],
+        // Multiple user/passwd supported
+        // The User&Passwd list for basic auth
+        "basic_auth_users": [
+            {"user": "demo1", "password": "pwd1"},
+            {"user": "demo1", "password": "pwd2"},
+        ],
 
 
     // =================================
     // CAS SSO Login
     // Enable? true or false
     "enable_cas_auth": false,
-    // Point to the CAS authentication URL
-    "cas_server_url": "https://point-to-the-cas-server/cas",
+        // Point to the CAS authentication URL
+        "cas_server_url": "https://point-to-the-cas-server/cas",
 
 };
