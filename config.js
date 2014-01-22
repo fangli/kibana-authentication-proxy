@@ -23,15 +23,21 @@ module.exports =  {
         "ssl_key_file": "POINT_TO_YOUR_SSL_KEY",
         // Use absolute path for the certification file
         "ssl_cert_file": "POINT_TO_YOUR_SSL_CERT",
+
     // The ES index for saving kibana dashboards
     // default to "kibana-int"
-    // We are planning a feature that saving kibana dashboard and settings to individual
-    // indices of ElasticSearch for different users.
-    // That is to say, every users can save and use their own customized kibana dashboards
-    // without affecting others.
-    // if you are really dying for this feature submit a github issue
-    "kibana_es_index": "kibana-int",
+    // With the default configuration, all users will use the same index for kibana dashboards settings,
+    // But we support using different kibana settings for each user.
+    // If you want to use different kibana indices for individual users, use %user% instead of the real username
+    // Since we support multiple authentication types(google, cas or basic), you must decide which one you gonna use.
 
+    // Bad English:D
+    // For example:
+    // Config "kibana_es_index": "kibana-int-for-%user%", "which_auth_type_for_kibana_index": "basic"
+    // will use kibana index settings like "kibana-int-for-demo1", "kibana-int-for-demo2" for user demo1 and demo2.
+    // in this case, if you enabled both Google Oauth2 and BasicAuth, and the username of BasicAuth is the boss.
+    "kibana_es_index": "kibana-int", // "kibana-int-%user%"
+    "which_auth_type_for_kibana_index": "cas", // google, cas or basic
 
     ////////////////////////////////////
     // Security Configurations
