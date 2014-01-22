@@ -7,6 +7,7 @@ Hosts the latest [kibana3](www.elasticsearch.org/overview/kibana/) and elasticse
 - Support Elasticsearch which protected by basic authentication, only kibana-authentication-proxy knows the user/passwd
 - Compatible with the latest kibana3
 - Enhanced authentication methods. Now support Google OAuth2, BasicAuth(multiple users supported) and CAS Authentication for the clients
+- Per-user kibana index supported. now you can use index kibana-int-userA for user A and kibana-int-userB for user B
 - Inspired by and based on [kibana-proxy](https://github.com/hmalphettes/kibana-proxy), most of the proxy libraries were written by them, thanks:)
 
 *We NO LONGER support third-party plugins such as `Bigdesk` or `Head` since it's hard to test and maintain*
@@ -49,7 +50,8 @@ All settings are placed in /config.js, hack it as you go.
 - ``listen_port_ssl``: *If enable_ssl_port set to true, this is the port of SSL*
 - ``ssl_key_file``: *Point to the ssl key file*
 - ``ssl_cert_file``: *Point to the ssl certification file*
-- ``kibana_es_index``: *The ES index for saving kibana dashboards*
+- ``kibana_es_index``: *The ES index for saving kibana dashboards, now per-user configurations supported. using %user% instead of the username*
+- ``which_auth_type_for_kibana_index``: *Where the variable %user% comes from? which authentication type you want to use for it?*
 - ``cookie_secret``: *The secret token for cookies. replace it with a random string for security*
 
 ### Client authentication settings
@@ -94,6 +96,7 @@ Contributing
 
 Releases
 ========
+- Per-user kibana index supported
 - Fixed bug: Deprecated function alert of connect3
 - Added basic auth
 - Fixed bug: use new config for kibana3
