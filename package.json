@@ -21,7 +21,7 @@
   "license": "MIT",
   "copyright": "Funplus Game",
   "dependencies": {
-    "express": "*",
+    "express": "3.*",
     "passport": "*",
     "passport-google-oauth": "*",
     "connect-restreamer": "*",
