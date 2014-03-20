@@ -15,6 +15,10 @@ module.exports =  {
     ////////////////////////////////////
     // Which port listen to
     "listen_port": 9201,
+    // Control HTTP max-Age header. Whether the browser cache static kibana files or not?
+    // 0 for no-cache, unit in millisecond, default to 0
+    // We strongly recommand you set to a larger number such as 2592000000(a month) to get a better loading speed
+    "brower_cache_maxage": 0,
     // Enable SSL protocol
     "enable_ssl_port": false,
         // The following settings are valid only when enable_ssl_port is true

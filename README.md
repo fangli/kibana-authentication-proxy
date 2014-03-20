@@ -46,6 +46,7 @@ All settings are placed in /config.js, hack it as you go.
 ### Client settings
 
 - ``listen_port``:  *The listen port of kibana3*
+- ``brower_cache_maxage``:  *The browser cache max-Age controll, for a better loading speed*
 - ``enable_ssl_port``: *Enable SSL or not?*
 - ``listen_port_ssl``: *If enable_ssl_port set to true, this is the port of SSL*
 - ``ssl_key_file``: *Point to the ssl key file*

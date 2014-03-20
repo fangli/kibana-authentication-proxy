@@ -34,7 +34,8 @@ require('./lib/es-proxy').configureESProxy(app, config.es_host, config.es_port,
 app.get('/config.js', kibana3configjs);
 
 // Serve all kibana3 frontend files
-app.use('/', express.static(__dirname + '/kibana/src'));
+app.use(express.compress());
+app.use('/', express.static(__dirname + '/kibana/src', {maxAge: config.brower_cache_maxage || 0}));
 
 
 run();
