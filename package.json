@@ -25,7 +25,7 @@
     "passport": "*",
     "passport-google-oauth": "*",
     "connect-restreamer": "*",
-    "cas": "*"
+    "xml2js": "*"
   },
   "devDependencies": {
   },

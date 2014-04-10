@@ -92,5 +92,6 @@ module.exports =  {
     "enable_cas_auth": false,
         // Point to the CAS authentication URL
         "cas_server_url": "https://point-to-the-cas-server/cas",
-
+        // CAS protocol version, one of 1.0 or 2.0
+        "cas_protocol_version": 1.0,
 };
