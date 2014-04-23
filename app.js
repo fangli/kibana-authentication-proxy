@@ -21,21 +21,32 @@ app.use(express.cookieParser());
 app.use(express.session({ secret: config.cookie_secret }));
 
 // Authentication
+if (config.enable_basic_auth && config.basic_auth_file && fs.existsSync(config.basic_auth_file)) {
+    console.log('basic_auth_file defined and found, so reading it ...');
+    var basic_auth_users=fs.readFileSync(config.basic_auth_file,'utf8');
+    var userpass=basic_auth_users.split('\n');
+    for (var userpass_index in userpass) {
+        var uspa=userpass[userpass_index].match(/^([^:]+):(.+)/);
+        if (uspa) {
+            config.basic_auth_users[config.basic_auth_users.length]={"user": uspa[1], "password": uspa[2]};
+        }
+    }
+}
 require('./lib/basic-auth').configureBasic(express, app, config);
 require('./lib/google-oauth').configureOAuth(express, app, config);
 require('./lib/cas-auth.js').configureCas(express, app, config);
 
 // Setup ES proxy
 require('./lib/es-proxy').configureESProxy(app, config.es_host, config.es_port,
-          config.es_username, config.es_password);
+          config.es_username, config.es_password, config.base_path);
 
 // Serve config.js for kibana3
 // We should use special config.js for the frontend and point the ES to __es/
-app.get('/config.js', kibana3configjs);
+app.get(config.base_path + '/config.js', kibana3configjs);
 
 // Serve all kibana3 frontend files
 app.use(express.compress());
-app.use('/', express.static(__dirname + '/kibana/src', {maxAge: config.brower_cache_maxage || 0}));
+app.use(config.base_path + '/', express.static(__dirname + '/kibana/src', {maxAge: config.brower_cache_maxage || 0}));
 
 
 run();
@@ -78,7 +89,7 @@ function kibana3configjs(req, res) {
 
   res.setHeader('Content-Type', 'application/javascript');
   res.end("define(['settings'], " +
-    "function (Settings) {'use strict'; return new Settings({elasticsearch: '/__es', default_route     : '/dashboard/file/default.json'," +
+    "function (Settings) {'use strict'; return new Settings({elasticsearch: '" + config.base_path + "/__es', default_route     : '/dashboard/file/default.json'," +
       "kibana_index: '" +
       getKibanaIndex() +
       "', panel_names: ['histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'sparklines'] }); });");
