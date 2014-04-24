@@ -17,6 +17,11 @@ var app = express();
 
 console.log('Server starting...');
 
+if (!config.base_path) {
+	config.base_path="";
+	console.log("No base_path specified in config so using /");
+}
+
 app.use(express.cookieParser());
 app.use(express.session({ secret: config.cookie_secret }));
 
