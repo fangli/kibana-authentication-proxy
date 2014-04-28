@@ -74,6 +74,7 @@ Google OAuth2 needs authorized redirect URIs for your app, please add it first a
 
 - ``enable_basic_auth``: *Enable or not?*
 - ``basic_auth_users``:  *A list of user/passwd, see the comments in config.js for help. leave empty if you won't use it*
+- ``basic_auth_file``:  *if is specified and exists, the user password combinations are read from the named file and overrule the here defined settings from array basic_auth_users. File format is one combination per line split by first appearing colon
 
 ***3. CAS Auth***
 
