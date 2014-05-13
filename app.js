@@ -22,6 +22,30 @@ if (!config.base_path) {
 	console.log("No base_path specified in config so using /");
 }
 
+index_filter_usregex=new Object();
+if (!config.index_filter_trigger) {
+	config.index_filter_trigger='^logstash-';
+}
+if (!config.index_filter_file) {
+	config.index_filter_file=false;
+	console.log("No index_filter_file specified so not using index filtering");
+} else {
+    if ( fs.existsSync(config.index_filter_file) ) {
+        var index_filter_data=fs.readFileSync(config.index_filter_file,'utf8');
+        var userregexes=index_filter_data.split('\n');
+        for (var userregex in userregexes) {
+            var usre=userregexes[userregex].match(/^([^:]+):(.+)/);
+            if (usre) {
+                index_filter_usregex[usre[1]]=usre[2];
+            }
+        }
+        console.log("index_filter_file specified, read and parsed - so using it");
+    } else {
+	    config.index_filter_file=false;
+	    console.log("index_filter_file specified but not found in fs so not using index filtering");
+    }
+}
+
 app.use(express.cookieParser());
 app.use(express.session({ secret: config.cookie_secret }));
 
@@ -43,7 +67,7 @@ require('./lib/cas-auth.js').configureCas(express, app, config);
 
 // Setup ES proxy
 require('./lib/es-proxy').configureESProxy(app, config.es_host, config.es_port,
-          config.es_username, config.es_password, config.base_path);
+          config.es_username, config.es_password, config.base_path, config.index_filter_trigger, (config.index_filter_file) ? index_filter_usregex : false);
 
 // Serve config.js for kibana3
 // We should use special config.js for the frontend and point the ES to __es/

@@ -95,4 +95,22 @@ module.exports =  {
         "cas_server_url": "https://point-to-the-cas-server/cas",
         // CAS protocol version, one of 1.0 or 2.0
         "cas_protocol_version": 1.0,
+
+    // =================================
+    // IndexFilter
+    // if defined links to a flatfile in user:regex\n notation with regex applied to wished elasticsearch indizes
+    // for example:
+    // userA:^logstash-product-.+
+    // userB:^logstash-.+
+    //
+    // which translates to userA being allowed to access only indizes which start with logstash-product- and userB
+    // to be allowed to see everything which starts with logstash-
+    // "index_filter_file": "/point-to-your-index-filter-file/index.filter",
+
+    // =================================
+    // IndexTrigger
+    // if defined is a regex which determines (most time the prefix) for which index filtering will be applied
+    // this is to allow generix indizes (like /_nodes or /kibana-int-username) to pass through unfiltered
+    // "index_filter_trigger": '^logstash-',
+
 };

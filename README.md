@@ -74,11 +74,19 @@ Google OAuth2 needs authorized redirect URIs for your app, please add it first a
 
 - ``enable_basic_auth``: *Enable or not?*
 - ``basic_auth_users``:  *A list of user/passwd, see the comments in config.js for help. leave empty if you won't use it*
+- ``basic_auth_file``:  *if is specified and exists, the user password combinations are read from the named file and overrule the here defined settings from array basic_auth_users. File format is one combination per line split by first appearing colon
 
 ***3. CAS Auth***
 
 - ``enable_cas_auth``: *Enable or not?*
 - ``cas_server_url``: *Point to the CAS server URL*
+
+### Client Index Filter Settings
+
+Only makes sense when authentication is active. With this you can achieve some kind of authorization, that said meaning you can restrict access for certain users to certain elastisearch indizes
+
+- ``index_filter_file``: *if defined links to a flatfile in user:regex\n notation with regex applied to wished elasticsearch indizes, see also the comments in config.js*
+- ``index_filter_trigger``: *if defined is a regex which determines (most time the prefix) for which index filtering will be applied, see also the comments in config.js*
 
 Resources
 =========
