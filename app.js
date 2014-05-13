@@ -52,6 +52,7 @@ app.use(express.session({ secret: config.cookie_secret }));
 // Authentication
 if (config.enable_basic_auth && config.basic_auth_file && fs.existsSync(config.basic_auth_file)) {
     console.log('basic_auth_file defined and found, so reading it ...');
+    config.basic_auth_users=new Array();
     var basic_auth_users=fs.readFileSync(config.basic_auth_file,'utf8');
     var userpass=basic_auth_users.split('\n');
     for (var userpass_index in userpass) {
