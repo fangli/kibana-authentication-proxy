@@ -15,6 +15,9 @@ Hosts the latest [kibana3](www.elasticsearch.org/overview/kibana/) and elasticse
 Installation
 =====
 
+It's just a standard nodejs application, you could install it in the same server with ES, or not. Before run the following commands, please make sure you have [nodejs](http://nodejs.org/) and npm well installed.
+
+
 ```
 # git clone https://github.com/fangli/kibana-authentication-proxy
 # cd kibana-authentication-proxy/
