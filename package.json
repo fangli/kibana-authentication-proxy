@@ -14,6 +14,9 @@
     "kibana",
     "elasticsearch",
     "authentication",
+    "active directory",
+    "ldap",
+    "ad",
     "oauth2",
     "basic authentication"
   ],
@@ -22,6 +25,7 @@
   "copyright": "Funplus Game",
   "dependencies": {
     "express": "3.*",
+    "activedirectory": "*",
     "passport": "*",
     "passport-google-oauth": "*",
     "connect-restreamer": "*",

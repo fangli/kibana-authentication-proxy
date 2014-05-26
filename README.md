@@ -83,6 +83,13 @@ Google OAuth2 needs authorized redirect URIs for your app, please add it first a
 - ``enable_cas_auth``: *Enable or not?*
 - ``cas_server_url``: *Point to the CAS server URL*
 
+***4. AD Auth***
+- ``enable_adauth``: true / false
+- ``ad_fqdn``: 'example.com'
+- ``ad_ssl``: true / false
+- ``base_dn``: 'ou=department,dc=example,dc=com' 
+- ``member_of``: 'kibana_users'
+
 Resources
 =========
 - The original proxy project of [kibana-proxy](https://github.com/hmalphettes/kibana-proxy)

@@ -53,11 +53,16 @@ module.exports =  {
 
     ////////////////////////////////////
     // Kibana3 Authentication Settings
-    // Currently we support 3 different auth methods: Google OAuth2, Basic Auth and CAS SSO.
+    // Currently we support 3 different auth methods: Google OAuth2, Basic Auth, CAS SSO and AD.
     // You can use one of them or both
     ////////////////////////////////////
 
-
+    "enable_adauth": false,
+    	"ad_fqdn": 'example.com',
+		"ad_ssl": false,
+		"base_dn": 'ou=department,dc=example,dc=com', 
+		"member_of": 'kibana_users',     
+    
     // =================================
     // Google OAuth2 settings
     // Enable? true or false
