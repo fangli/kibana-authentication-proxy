@@ -24,6 +24,7 @@ app.use(express.session({ secret: config.cookie_secret }));
 require('./lib/basic-auth').configureBasic(express, app, config);
 require('./lib/google-oauth').configureOAuth(express, app, config);
 require('./lib/cas-auth.js').configureCas(express, app, config);
+require('./lib/ad-auth.js').configureADAuth(express, app, config);
 
 // Setup ES proxy
 require('./lib/es-proxy').configureESProxy(app, config.es_host, config.es_port,
@@ -65,6 +66,8 @@ function kibana3configjs(req, res) {
         user = req.googleOauth.id;
       } else if (user_type === 'basic') {
         user = req.user;
+      } else if (user_type === 'ad') {
+      	user = req.session.ad_user;        
       } else if (user_type === 'cas') {
         user = req.session.cas_user_name;
       } else {
