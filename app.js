@@ -70,6 +70,7 @@ function kibana3configjs(req, res) {
       } else {
         user = 'unknown';
       }
+      user = user.toLowerCase();
       return raw_index.replace(/%user%/gi, user);
     } else {
       return raw_index;

@@ -40,6 +40,7 @@ module.exports =  {
     // Config "kibana_es_index": "kibana-int-for-%user%", "which_auth_type_for_kibana_index": "basic"
     // will use kibana index settings like "kibana-int-for-demo1", "kibana-int-for-demo2" for user demo1 and demo2.
     // in this case, if you enabled both Google Oauth2 and BasicAuth, and the username of BasicAuth is the boss.
+    // the index name will be converted to lowercase for technical reasons
     "kibana_es_index": "kibana-int", // "kibana-int-%user%"
     "which_auth_type_for_kibana_index": "cas", // google, cas or basic
 
