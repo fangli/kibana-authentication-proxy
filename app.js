@@ -15,6 +15,11 @@ var fs = require('fs');
 var config = require('./config');
 var app = express();
 
+app.use(function(req, res, next){
+  req.url = req.url.replace(/\/\//,'/');
+  next();
+});
+
 console.log('Server starting...');
 
 if (!config.base_path) {
