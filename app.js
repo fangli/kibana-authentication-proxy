@@ -15,6 +15,8 @@ var fs = require('fs');
 var config = require('./config');
 var app = express();
 
+app.use(express.logger());
+
 app.use(function(req, res, next){
   req.url = req.url.replace(/\/\//,'/');
   next();
