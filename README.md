@@ -33,6 +33,8 @@ It's just a standard nodejs application, you could install it in the same server
 # node app.js
 ```
 
+Alternatively if you use [chef](https://github.com/opscode/chef), you can use [this cookbook](https://github.com/donaldguy/kibana-authentication-proxy-cookbook)
+
 Configuration
 =============
 
