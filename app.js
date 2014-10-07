@@ -27,7 +27,7 @@ require('./lib/cas-auth.js').configureCas(express, app, config);
 
 // Setup ES proxy
 require('./lib/es-proxy').configureESProxy(app, config.es_host, config.es_port,
-          config.es_username, config.es_password);
+          config.es_username, config.es_password, config.es_using_ssl);
 
 // Serve config.js for kibana3
 // We should use special config.js for the frontend and point the ES to __es/
