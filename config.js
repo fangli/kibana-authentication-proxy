@@ -19,6 +19,8 @@ module.exports =  {
     // 0 for no-cache, unit in millisecond, default to 0
     // We strongly recommand you set to a larger number such as 2592000000(a month) to get a better loading speed
     "brower_cache_maxage": 0,
+    // Write URLs with a prefix to allow serving behind an apache proxy
+    "proxy_prefix": "/kibana",
     // Enable SSL protocol
     "enable_ssl_port": false,
         // The following settings are valid only when enable_ssl_port is true

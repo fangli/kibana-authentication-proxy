@@ -77,8 +77,12 @@ function kibana3configjs(req, res) {
   }
 
   res.setHeader('Content-Type', 'application/javascript');
+  var prefix = config.proxy_prefix;
+  if ( typeof prefix === 'undefined' || !prefix ){
+    prefix = "";
+  }
   res.end("define(['settings'], " +
-    "function (Settings) {'use strict'; return new Settings({elasticsearch: '/__es', default_route     : '/dashboard/file/default.json'," +
+    "function (Settings) {'use strict'; return new Settings({elasticsearch: '" + prefix + "/__es', default_route     : '/dashboard/file/default.json'," +
       "kibana_index: '" +
       getKibanaIndex() +
       "', panel_names: ['histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'sparklines'] }); });");
