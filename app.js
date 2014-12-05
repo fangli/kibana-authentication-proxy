@@ -29,6 +29,10 @@ require('./lib/cas-auth.js').configureCas(express, app, config);
 require('./lib/es-proxy').configureESProxy(app, config.es_host, config.es_port,
           config.es_username, config.es_password);
 
+// Load kibana's config.js
+var kibana_config = require('./lib/kibana-config');
+kibana_config.elasticsearch = '/__es';
+
 // Serve config.js for kibana3
 // We should use special config.js for the frontend and point the ES to __es/
 app.get('/config.js', kibana3configjs);
@@ -54,7 +58,7 @@ function run() {
 }
 
 function kibana3configjs(req, res) {
- 
+
 
   function getKibanaIndex() {
     var raw_index = config.kibana_es_index;
@@ -76,10 +80,8 @@ function kibana3configjs(req, res) {
     }
   }
 
+  kibana_config.kibana_index = getKibanaIndex();
+
   res.setHeader('Content-Type', 'application/javascript');
-  res.end("define(['settings'], " +
-    "function (Settings) {'use strict'; return new Settings({elasticsearch: '/__es', default_route     : '/dashboard/file/default.json'," +
-      "kibana_index: '" +
-      getKibanaIndex() +
-      "', panel_names: ['histogram', 'map', 'pie', 'table', 'filtering', 'timepicker', 'text', 'hits', 'column', 'trends', 'bettermap', 'query', 'terms', 'sparklines'] }); });");
+  res.end("define(['settings'], function (Settings) {'use strict'; return new Settings(" + JSON.stringify(kibana_config) + "); });");
 }
