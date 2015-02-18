@@ -1,0 +1,20 @@
+[{
+  "name"             : "kibana-authentication-proxy",
+  "cwd"              : "/your/working/dir/kibana-authentication-proxy",
+  "args"             : "",
+  "script"           : "app.js",
+  "log-date-format"  : "YYYY-MM-DD HH:mm:ss.SSS Z",
+  "error_file"       : "/your/working/dir/logs/kibana-authentication-proxy.stderr.log",
+  "out_file"         : "/your/working/dir/logs/kibana-authentication-proxy.stdout.log",
+  "pid_file"         : "/your/working/dir/pids/kibana-authentication-proxy.pid",
+  "run_as_user"      : "yourworkinguser",
+  "run_as_group"     : "yourworkinggroup",
+  "instances"        : "max",
+  "min_uptime"       : "1000",
+  "max_restarts"     : "15",
+  "watch"            : false,
+  "ignoreWatch"      : ["node_modules"],
+  "merge_logs"       : false,
+  "exec_interpreter" : "node",
+  "exec_mode"        : "cluster_mode"
+}]

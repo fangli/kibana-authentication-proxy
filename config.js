@@ -9,6 +9,7 @@ module.exports =  {
     "es_username":  "",  // The basic authentication user of ES server, leave it blank if no basic auth applied
     "es_password":  "",  // The password of basic authentication of ES server, leave it blank if no basic auth applied.
 
+    "base_path": "/kibana",
 
     ////////////////////////////////////
     // Proxy server configurations
@@ -78,6 +79,14 @@ module.exports =  {
     // It will be applied on the client who access kibana3.
     // Enable? true or false
     "enable_basic_auth": false,
+    // If basic_auth_file is specified and exists, the user password combinations
+    // are read from the named file and overrule the here defined settings from
+    // array basic_auth_users.
+    // File format is one combination per line split by first appearing colon
+    // e.g.
+    // user1:password1
+    // user2:password2
+    "basic_auth_file": "",
         // Multiple user/passwd supported
         // The User&Passwd list for basic auth
         "basic_auth_users": [
@@ -94,4 +103,22 @@ module.exports =  {
         "cas_server_url": "https://point-to-the-cas-server/cas",
         // CAS protocol version, one of 1.0 or 2.0
         "cas_protocol_version": 1.0,
+
+    // =================================
+    // IndexFilter
+    // if defined links to a flatfile in user:regex\n notation with regex applied to wished elasticsearch indizes
+    // for example:
+    // userA:^logstash-product-.+
+    // userB:^logstash-.+
+    //
+    // which translates to userA being allowed to access only indizes which start with logstash-product- and userB
+    // to be allowed to see everything which starts with logstash-
+    // "index_filter_file": "/point-to-your-index-filter-file/index.filter",
+
+    // =================================
+    // IndexTrigger
+    // if defined is a regex which determines (most time the prefix) for which index filtering will be applied
+    // this is to allow generix indizes (like /_nodes or /kibana-int-username) to pass through unfiltered
+    // "index_filter_trigger": '^logstash-',
+
 };

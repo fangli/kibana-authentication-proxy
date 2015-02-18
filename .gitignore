@@ -1,3 +1,5 @@
+kibana-auth-proxy.pm2.json
+config.js.orig
 node_modules
 npm-debug.log
 .DS_Store
