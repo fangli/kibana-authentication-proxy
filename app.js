@@ -29,7 +29,7 @@ if (!config.base_path) {
 	console.log("No base_path specified in config so using /");
 }
 
-index_filter_usregex=new Object();
+global.index_filter_usregex=new Object();
 if (!config.index_filter_trigger) {
 	config.index_filter_trigger='^logstash-';
 }
@@ -43,10 +43,24 @@ if (!config.index_filter_file) {
         for (var userregex in userregexes) {
             var usre=userregexes[userregex].match(/^([^:]+):(.+)/);
             if (usre) {
-                index_filter_usregex[usre[1]]=usre[2];
+                global.index_filter_usregex[usre[1]]=usre[2];
             }
         }
         console.log("index_filter_file specified, read and parsed - so using it");
+        fs.watchFile(config.index_filter_file, { persistent: true, interval: 5007 }, function(curr,prev) {
+            if (curr.mtime.getTime() != prev.mtime.getTime()) {
+                console.log('INDEX FILTER File was changed, so reloading values');
+                global.index_filter_usregex=new Object();
+                var index_filter_data=fs.readFileSync(config.index_filter_file,'utf8');
+                var userregexes=index_filter_data.split('\n');
+                for (var userregex in userregexes) {
+                    var usre=userregexes[userregex].match(/^([^:]+):(.+)/);
+                    if (usre) {
+                        global.index_filter_usregex[usre[1]]=usre[2];
+                    }
+                }
+            }
+        });
     } else {
 	    config.index_filter_file=false;
 	    console.log("index_filter_file specified but not found in fs so not using index filtering");
@@ -68,6 +82,20 @@ if (config.enable_basic_auth && config.basic_auth_file && fs.existsSync(config.b
             config.basic_auth_users[config.basic_auth_users.length]={"user": uspa[1], "password": uspa[2]};
         }
     }
+    fs.watchFile(config.basic_auth_file, { persistent: true, interval: 5007 }, function(curr,prev) {
+        if (curr.mtime.getTime() != prev.mtime.getTime()) {
+            console.log('BASIC AUTH File was changed, so reloading values');
+            config.basic_auth_users=new Array();
+            var basic_auth_users=fs.readFileSync(config.basic_auth_file,'utf8');
+            var userpass=basic_auth_users.split('\n');
+            for (var userpass_index in userpass) {
+              var uspa=userpass[userpass_index].match(/^([^:]+):(.+)/);
+                if (uspa) {
+                   config.basic_auth_users[config.basic_auth_users.length]={"user": uspa[1], "password": uspa[2]};
+               }
+            }
+        }
+    });
 }
 require('./lib/basic-auth').configureBasic(express, app, config);
 require('./lib/google-oauth').configureOAuth(express, app, config);
@@ -75,7 +103,7 @@ require('./lib/cas-auth.js').configureCas(express, app, config);
 
 // Setup ES proxy
 require('./lib/es-proxy').configureESProxy(app, config.es_host, config.es_port,
-          config.es_username, config.es_password, config.base_path, config.index_filter_trigger, (config.index_filter_file) ? index_filter_usregex : false);
+          config.es_username, config.es_password, config.base_path, config.index_filter_trigger);
 
 // Serve config.js for kibana3
 // We should use special config.js for the frontend and point the ES to __es/
