@@ -29,6 +29,19 @@ if (!config.base_path) {
 	console.log("No base_path specified in config so using /");
 }
 
+// Index Filtering
+function readAndInitIndexFilterFile() {
+        global.index_filter_usregex=new Object();
+        var index_filter_data=fs.readFileSync(config.index_filter_file,'utf8');
+        var userregexes=index_filter_data.split('\n');
+        for (var userregex in userregexes) {
+            var usre=userregexes[userregex].match(/^([^:]+):(.+)/);
+            if (usre) {
+                global.index_filter_usregex[usre[1]]=usre[2];
+            }
+        }
+}
+
 global.index_filter_usregex=new Object();
 if (!config.index_filter_trigger) {
 	config.index_filter_trigger='^logstash-';
@@ -38,27 +51,12 @@ if (!config.index_filter_file) {
 	console.log("No index_filter_file specified so not using index filtering");
 } else {
     if ( fs.existsSync(config.index_filter_file) ) {
-        var index_filter_data=fs.readFileSync(config.index_filter_file,'utf8');
-        var userregexes=index_filter_data.split('\n');
-        for (var userregex in userregexes) {
-            var usre=userregexes[userregex].match(/^([^:]+):(.+)/);
-            if (usre) {
-                global.index_filter_usregex[usre[1]]=usre[2];
-            }
-        }
         console.log("index_filter_file specified, read and parsed - so using it");
+        readAndInitIndexFilterFile();
         fs.watchFile(config.index_filter_file, { persistent: true, interval: 5007 }, function(curr,prev) {
             if (curr.mtime.getTime() != prev.mtime.getTime()) {
                 console.log('INDEX FILTER File was changed, so reloading values');
-                global.index_filter_usregex=new Object();
-                var index_filter_data=fs.readFileSync(config.index_filter_file,'utf8');
-                var userregexes=index_filter_data.split('\n');
-                for (var userregex in userregexes) {
-                    var usre=userregexes[userregex].match(/^([^:]+):(.+)/);
-                    if (usre) {
-                        global.index_filter_usregex[usre[1]]=usre[2];
-                    }
-                }
+                readAndInitIndexFilterFile();
             }
         });
     } else {
@@ -71,8 +69,7 @@ app.use(express.cookieParser());
 app.use(express.session({ secret: config.cookie_secret }));
 
 // Authentication
-if (config.enable_basic_auth && config.basic_auth_file && fs.existsSync(config.basic_auth_file)) {
-    console.log('basic_auth_file defined and found, so reading it ...');
+function readAndInitBasicAuthFile() {
     config.basic_auth_users=new Array();
     var basic_auth_users=fs.readFileSync(config.basic_auth_file,'utf8');
     var userpass=basic_auth_users.split('\n');
@@ -82,21 +79,18 @@ if (config.enable_basic_auth && config.basic_auth_file && fs.existsSync(config.b
             config.basic_auth_users[config.basic_auth_users.length]={"user": uspa[1], "password": uspa[2]};
         }
     }
+}
+if (config.enable_basic_auth && config.basic_auth_file && fs.existsSync(config.basic_auth_file)) {
+    console.log('basic_auth_file defined and found, so reading it ...');
+    readAndInitBasicAuthFile();
     fs.watchFile(config.basic_auth_file, { persistent: true, interval: 5007 }, function(curr,prev) {
         if (curr.mtime.getTime() != prev.mtime.getTime()) {
             console.log('BASIC AUTH File was changed, so reloading values');
-            config.basic_auth_users=new Array();
-            var basic_auth_users=fs.readFileSync(config.basic_auth_file,'utf8');
-            var userpass=basic_auth_users.split('\n');
-            for (var userpass_index in userpass) {
-              var uspa=userpass[userpass_index].match(/^([^:]+):(.+)/);
-                if (uspa) {
-                   config.basic_auth_users[config.basic_auth_users.length]={"user": uspa[1], "password": uspa[2]};
-               }
-            }
+            readAndInitBasicAuthFile();
         }
     });
 }
+
 require('./lib/basic-auth').configureBasic(express, app, config);
 require('./lib/google-oauth').configureOAuth(express, app, config);
 require('./lib/cas-auth.js').configureCas(express, app, config);
