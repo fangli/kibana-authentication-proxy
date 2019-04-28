@@ -3,11 +3,11 @@ module.exports =  {
     ////////////////////////////////////
     // ElasticSearch Backend Settings
     ////////////////////////////////////
-    "es_host": "localhost",  // The host of Elastic Search
-    "es_port": 9200,  // The port of Elastic Search
+    "es_host": "mapeeks.com",  // The host of Elastic Search
+    "es_port": 3128,  // The port of Elastic Search
     "es_using_ssl": false,  // If the ES is using SSL(https)?
-    "es_username":  "",  // The basic authentication user of ES server, leave it blank if no basic auth applied
-    "es_password":  "",  // The password of basic authentication of ES server, leave it blank if no basic auth applied.
+    "es_username":  "Twrp",  // The basic authentication user of ES server, leave it blank if no basic auth applied
+    "es_password":  "Twrp@1317",  // The password of basic authentication of ES server, leave it blank if no basic auth applied.
 
 
     ////////////////////////////////////
